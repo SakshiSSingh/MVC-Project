@@ -1,0 +1,37 @@
+﻿@using MVCUserPortal.Models;
+
+@{
+    ViewBag.Title = "Invoice";
+}
+
+
+<h2>Invoice</h2>
+@foreach (Item item in (List<Item>)Session["cart"])
+{
+    <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+                <h6 class="my-0">@item.Product.ProductName</h6>
+                <small class="text-muted">Description : @item.Product.ProductDescription  </small>
+            </div>
+            <span class="text-muted ">Price : @item.Product.ProductPrice</span>
+        </li>
+    </ul>
+}
+
+@{
+    List<Item> cart = (List<Item>)Session["cart"];
+    var total = cart.Sum(item => item.Product.ProductPrice * item.Quantity);
+}
+
+
+<ul class="list-group mb-3">
+    <li class="list-group-item d-flex justify-content-between lh-condensed">
+        <div>
+            <h6 class="my-0">Total Price : @total</h6>
+        </div>
+    </li>
+</ul>
+
+
+

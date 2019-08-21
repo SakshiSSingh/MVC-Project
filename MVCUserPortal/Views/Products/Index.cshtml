@@ -1,0 +1,77 @@
+﻿@model IEnumerable<MVCUserPortal.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" href="~/Content/display.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+    <h3>Welcome @Session["Username"]</h3>
+
+
+
+
+    <main role="main">
+
+
+
+        <div class="album py-5 bg-light">
+            <div class="container">
+
+                <div class="row">
+
+
+
+                    @foreach (var item in Model)
+                    {
+
+
+                        <div class="col-md-4">
+                            <div class="card mb-4 shadow-sm">
+                                <img src="@item.ProductImage" width="100%" height="225" class="bd-placeholder-img card-img-top" />
+                                <div class="card-body">
+
+                                    <p class="card-text">
+                                        @Html.DisplayFor(modelItem => item.ProductDescription)
+                                    </p>
+
+
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">
+                                                @Html.DisplayFor(modelItem => item.ProductName)
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">
+                                                @Html.DisplayFor(modelItem => item.ProductPrice)
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">
+                                                @Html.ActionLink("Details", "Details", new { id = item.ProductId })
+                                            </button>
+                                            <button onclick="location.href='@Url.Action("Buy", "Cart" , new { id = item.ProductId})' " type="button" class="btn btn-sm btn-outline-secondary">
+                                                Buy Now
+                                            </button>
+
+
+                                        </div>
+                                        <small class="text-muted">9 mins</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+
+    </main>
+</body>
+</html>
